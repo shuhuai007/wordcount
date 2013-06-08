@@ -1,5 +1,11 @@
 package com.zhoujie.test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -70,9 +76,32 @@ public class WordCount {
             String hdfsBaseUrl = "hdfs://" + hdfsHost;
             conf.set("fs.default.name", hdfsBaseUrl);
             conf.set("mapred.job.tracker", jobTrackerHost);
+            
+//            String [] inputArr = dirInput.split(",");
+//            Map<String, ArrayList<String>> dirFileMap = new HashMap<String, ArrayList<String>>();
+//            for(String inputStr : inputArr) {
+//                String inputDir = inputStr.substring(0, inputStr.lastIndexOf("/"));
+//                String inputfilename = inputStr.substring(inputStr.lastIndexOf("/") + 1);
+//                FileInputFormat.addInputPath(conf, new Path(inputDir));
+//                ArrayList<String> fileList = dirFileMap.get(inputDir);
+//                if (null == fileList) {
+//                    fileList = new ArrayList<String>();
+//                    dirFileMap.put(inputDir, fileList);
+//                }
+//                fileList.add(inputfilename);
+//            }
+//            for(String inputDir : dirFileMap.keySet()){
+//                ArrayList<String> fileList = dirFileMap.get(inputDir);
+//                String fileStrs = StringUtils.join(fileList.toArray());
+//                conf.set(inputDir, fileStrs);
+//            }
+
+//            FileInputFormat.setInputPathFilter(conf,);
 
             FileInputFormat.setInputPaths(conf, new Path[] { new Path(
                     hdfsBaseUrl + dirInput) });
+            
+            
             FileOutputFormat.setOutputPath(conf, new Path(hdfsBaseUrl
                     + dirOutput));
 

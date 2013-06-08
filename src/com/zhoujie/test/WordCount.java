@@ -98,12 +98,10 @@ public class WordCount {
 
 //            FileInputFormat.setInputPathFilter(conf,);
 
-            FileInputFormat.setInputPaths(conf, new Path[] { new Path(
-                    hdfsBaseUrl + dirInput) });
+            FileInputFormat.setInputPaths(conf, new Path[] { new Path(dirInput) });
             
             
-            FileOutputFormat.setOutputPath(conf, new Path(hdfsBaseUrl
-                    + dirOutput));
+            FileOutputFormat.setOutputPath(conf, new Path(dirOutput));
 
             conf.setMapperClass(WordCountMapper.class);
             conf.setReducerClass(WordCountReducer.class);

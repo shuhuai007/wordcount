@@ -102,7 +102,8 @@ public class WordCount {
             for (int i = 0 ; i < inputArr.length ; i ++) {
                 inputPathArr[i] = new Path(inputArr[i]);
             }
-            FileInputFormat.setInputPaths(conf, inputPathArr);
+//            FileInputFormat.setInputPaths(conf, inputPathArr);
+            FileInputFormat.setInputPaths(conf, dirInput);
 
             FileOutputFormat.setOutputPath(conf, new Path(dirOutput));
 

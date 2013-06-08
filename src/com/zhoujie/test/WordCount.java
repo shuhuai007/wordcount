@@ -97,10 +97,13 @@ public class WordCount {
 //            }
 
 //            FileInputFormat.setInputPathFilter(conf,);
+            String [] inputArr = dirInput.split(",");
+            Path [] inputPathArr = new Path[inputArr.length];
+            for (int i = 0 ; i < inputArr.length ; i ++) {
+                inputPathArr[i] = new Path(inputArr[i]);
+            }
+            FileInputFormat.setInputPaths(conf, inputPathArr);
 
-            FileInputFormat.setInputPaths(conf, new Path[] { new Path(dirInput) });
-            
-            
             FileOutputFormat.setOutputPath(conf, new Path(dirOutput));
 
             conf.setMapperClass(WordCountMapper.class);

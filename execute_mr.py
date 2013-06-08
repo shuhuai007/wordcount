@@ -60,7 +60,7 @@ def execute_regular_job(jobname):
     cmd = "hadoop fs -rmr %s" % cloud_outputdir
     returncode, log = exec_cmd(cmd)
     print log
-    cmd = "hadoop jar " + binDir + "wordcount.jar " + " " + getClassName(jobname) + " " + "-D mapred.reduce.tasks=10" + " " + "--input=" + cloud_inputdir + " " + "--output=" + cloud_outputdir
+    cmd = "hadoop jar " + binDir + "wordcount.jar " + " " + getClassName(jobname) + " " + "-D mapred.reduce.tasks=10" + " " + "--input=" + cloud_inputdir + " " + "--output=" + cloud_outputdir + " " + "--hdfsHost=sm98:9000" + " " + "--jobTrackerHost=sm99:9001"
     returncode, log = exec_cmd(cmd)
     print log
 

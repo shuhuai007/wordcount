@@ -14,7 +14,7 @@ parser = OptionParser()
 runDir = os.path.dirname(os.path.abspath(__file__))
 binDir = "%s/build/" % runDir
 
-cloud_inputdir = "zhoujie/input/wordcount"
+cloud_inputdir = "zhoujie/input/wordcount/a,zhoujie/input/wordcount1/b"
 cloud_output_basedir = "zhoujie/output"
 
 ruleClassNameMap = {"ip_cookie_channel" : "com.allyes.frauddetection.SSPIPCookieTimeintervalChannel",

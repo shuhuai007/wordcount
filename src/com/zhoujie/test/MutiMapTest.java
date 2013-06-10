@@ -5,9 +5,11 @@ import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Mapper.Context;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
@@ -17,7 +19,8 @@ import org.apache.hadoop.util.ToolRunner;
 
 public class MutiMapTest extends Configured implements Tool {
 
-    public static class MutiMapMaper extends AbstractMutilOutputMapper<Text, Text> {
+    public static class MutiMapMaper extends
+            AbstractMutilOutputMapper<Text, Text> {
 
         @Override
         protected String getBaseOutputPath(String dirname) {
@@ -28,18 +31,35 @@ public class MutiMapTest extends Configured implements Tool {
             return sb.toString();
         }
 
-        public void map(Object key, Text value, Context context)
+        @Override
+        protected void map(LongWritable key, Text value, Context context)
                 throws IOException, InterruptedException {
-
             String line = value.toString();
             String[] lineArr = line.split(",");
             if (lineArr[0].equals("beijing")) {
-                super.mos_.write("beijing", NullWritable.get(), line, getBaseOutputPath("beijing"));
+                super.mos_.write("beijing", NullWritable.get(), line,
+                        getBaseOutputPath("beijing"));
             } else if (lineArr[0].equals("shanghai")) {
-                super.mos_.write("shanghai", NullWritable.get(), line, getBaseOutputPath("shanghai"));
+                super.mos_.write("shanghai", NullWritable.get(), line,
+                        getBaseOutputPath("shanghai"));
             }
 
         }
+
+        // public void map(Object key, Text value, Context context)
+        // throws IOException, InterruptedException {
+        //
+        // String line = value.toString();
+        // String[] lineArr = line.split(",");
+        // if (lineArr[0].equals("beijing")) {
+        // super.mos_.write("beijing", NullWritable.get(), line,
+        // getBaseOutputPath("beijing"));
+        // } else if (lineArr[0].equals("shanghai")) {
+        // super.mos_.write("shanghai", NullWritable.get(), line,
+        // getBaseOutputPath("shanghai"));
+        // }
+        //
+        // }
 
     }
 

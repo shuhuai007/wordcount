@@ -1,0 +1,10 @@
+package hive;
+
+option java_package = "com.zhoujie.hive";
+option java_outer_classname = "FactPBHive";
+
+message ShangHai {
+  extensions 20000 to max;
+  optional string region_name = 1;
+  optional string info = 2;
+}

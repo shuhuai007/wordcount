@@ -19,7 +19,8 @@ cloud_output_basedir = "zhoujie/output"
 
 ruleClassNameMap = {"ip_cookie_channel" : "com.allyes.frauddetection.SSPIPCookieTimeintervalChannel",
                     "periodicclick" : "com.allyes.frauddetection.SSPPeriodicClick",
-                    "wordcount" : "com.zhoujie.test.WordCount"}
+                    "wordcount" : "com.zhoujie.test.WordCount",
+                    "multioutput" : "com.zhoujie.test.MutiMapTest"}
 
 
 
@@ -64,10 +65,20 @@ def execute_regular_job(jobname):
     returncode, log = exec_cmd(cmd)
     print log
 
+def execute_input_output_job(jobname):
+    cloud_outputdir = "%s/%s" % (cloud_output_basedir, jobname)
+    cmd = "hadoop fs -rmr %s" % cloud_outputdir
+    returncode, log = exec_cmd(cmd)
+    print log
+    cmd = "hadoop jar " + binDir + "wordcount.jar " + " " + getClassName(jobname) + " " + "-D mapred.reduce.tasks=10" + " " + cloud_inputdir + " " + cloud_outputdir 
+    returncode, log = exec_cmd(cmd)
+    print log
+
 def main():
     #execute_mr('ssp', 'ip_cookie_channel')
     #execute_mr('ssp', 'periodicclick')
-    execute_regular_job('wordcount')
+    #execute_regular_job('wordcount')
+    execute_input_output_job('multioutput')
 
 if __name__ == '__main__':
     main()

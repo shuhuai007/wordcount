@@ -20,7 +20,7 @@ cloud_output_basedir = "zhoujie/output"
 ruleClassNameMap = {"ip_cookie_channel" : "com.allyes.frauddetection.SSPIPCookieTimeintervalChannel",
                     "periodicclick" : "com.allyes.frauddetection.SSPPeriodicClick",
                     "wordcount" : "com.zhoujie.test.WordCount",
-                    "multioutput" : "com.zhoujie.test.MutiMapTest"}
+                    "multioutput" : "com.zhoujie.test.TextMutiMapTest"}
 
 
 

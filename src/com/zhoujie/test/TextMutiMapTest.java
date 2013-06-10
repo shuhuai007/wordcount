@@ -17,7 +17,7 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class MutiMapTest extends Configured implements Tool {
+public class TextMutiMapTest extends Configured implements Tool {
 
     public static class MutiMapMaper extends
             AbstractMutilOutputMapper<Text, Text> {
@@ -46,34 +46,19 @@ public class MutiMapTest extends Configured implements Tool {
 
         }
 
-        // public void map(Object key, Text value, Context context)
-        // throws IOException, InterruptedException {
-        //
-        // String line = value.toString();
-        // String[] lineArr = line.split(",");
-        // if (lineArr[0].equals("beijing")) {
-        // super.mos_.write("beijing", NullWritable.get(), line,
-        // getBaseOutputPath("beijing"));
-        // } else if (lineArr[0].equals("shanghai")) {
-        // super.mos_.write("shanghai", NullWritable.get(), line,
-        // getBaseOutputPath("shanghai"));
-        // }
-        //
-        // }
-
     }
 
     public int run(String[] args) throws Exception {
 
         if (args.length != 2) {
             System.err
-                    .println(MutiMapTest.class.getSimpleName() + "<in> <out>");
+                    .println(TextMutiMapTest.class.getSimpleName() + "<in> <out>");
             return 1;
         }
 
         Configuration conf = this.getConf();
         Job job = new Job(conf);
-        job.setJarByClass(MutiMapTest.class);
+        job.setJarByClass(TextMutiMapTest.class);
         job.setJobName("MutiMapTest");
         job.setMapperClass(MutiMapMaper.class);
         job.setNumReduceTasks(0);
@@ -99,11 +84,11 @@ public class MutiMapTest extends Configured implements Tool {
 
     public static void main(String[] args) throws Exception {
         if (args.length == 0) {
-            String usage = MutiMapTest.class.getSimpleName() + "<in> <out>";
+            String usage = TextMutiMapTest.class.getSimpleName() + "<in> <out>";
             System.out.println(usage);
             return;
         }
-        int res = ToolRunner.run(new MutiMapTest(), args);
+        int res = ToolRunner.run(new TextMutiMapTest(), args);
         System.exit(res);
     }
 }

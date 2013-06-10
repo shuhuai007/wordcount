@@ -51,14 +51,6 @@
           <include name="lib/*.jar"/>
      </fileset>
     </jar>
-    <!--
-    <echo message="reconfigure xml files" />
-    <sequential>
-      <exec executable="python" failonerror="true">
-        <arg value="conf/modify_bulkload_config.py" />
-      </exec>
-    </sequential>
-    -->
   </target>
 
   <target name="jar-all" depends="jar">

@@ -42,9 +42,9 @@ public class MutiMapTest extends Configured implements Tool {
         String line = value.toString();
         String [] lineArr = line.split(",");
         if (lineArr[0].equals("beijing")) {
-            mos.write("beijing", NullWritable.get(), line, "beijing");
+            mos.write("test", NullWritable.get(), line, "beijing" + "/");
         } else if (lineArr[0].equals("shanghai")) {
-            mos.write("shanghai", NullWritable.get(), line, "shanghai");
+            mos.write("test", NullWritable.get(), line, "shanghai" + "/");
         }
         
     }
@@ -80,8 +80,9 @@ public class MutiMapTest extends Configured implements Tool {
     FileInputFormat.setInputPaths(job, args[0]);
     FileOutputFormat.setOutputPath(job, new Path(args[1]));
  
-    MultipleOutputs.addNamedOutput(job, "beijing", TextOutputFormat.class, NullWritable.class, Text.class);
-    MultipleOutputs.addNamedOutput(job, "shanghai", TextOutputFormat.class, NullWritable.class, Text.class);
+//    MultipleOutputs.addNamedOutput(job, "beijing", TextOutputFormat.class, NullWritable.class, Text.class);
+//    MultipleOutputs.addNamedOutput(job, "shanghai", TextOutputFormat.class, NullWritable.class, Text.class);
+    MultipleOutputs.addNamedOutput(job, "test", TextOutputFormat.class, NullWritable.class, Text.class);
 
     return job.waitForCompletion(true) ?  0 : 1; 
   }

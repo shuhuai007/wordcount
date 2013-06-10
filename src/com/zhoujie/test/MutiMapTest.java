@@ -42,9 +42,9 @@ public class MutiMapTest extends Configured implements Tool {
         String line = value.toString();
         String [] lineArr = line.split(",");
         if (lineArr[0].equals("beijing")) {
-            mos.write("test", NullWritable.get(), line, "beijing" + "/");
+            mos.write("test", NullWritable.get(), line, "beijing" + "/" + "good");
         } else if (lineArr[0].equals("shanghai")) {
-            mos.write("test", NullWritable.get(), line, "shanghai" + "/");
+            mos.write("test", NullWritable.get(), line, "shanghai" + "/" + "bad");
         }
         
     }

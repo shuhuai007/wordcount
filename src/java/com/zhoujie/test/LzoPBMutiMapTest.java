@@ -40,9 +40,13 @@ public class LzoPBMutiMapTest extends Configured implements Tool {
                 throws IOException, InterruptedException {
             String line = value.toString();
             String[] lineArr = line.split(",");
+            if (lineArr.length != 2) {
+                return;
+            }
             ShangHai.Builder shanghai = ShangHai.newBuilder();
             shanghai.setRegionName(lineArr[0]);
             shanghai.setInfo(lineArr[1]);
+
             ProtobufShangHaiWritable newValue = new ProtobufShangHaiWritable(shanghai.build());
             if (lineArr[0].equals("beijing")) {
                 super.mos_.write("beijing", NullWritable.get(), newValue,

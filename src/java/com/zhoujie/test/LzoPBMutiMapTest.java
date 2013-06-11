@@ -78,11 +78,11 @@ public class LzoPBMutiMapTest extends Configured implements Tool {
 
         // job.setInputFormatClass(LzoLubanLogProtobufB64LineInputFormat.class);
 
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
+//        job.setOutputKeyClass(Text.class);
+//        job.setOutputValueClass(Text.class);
 
         job.setMapOutputKeyClass(NullWritable.class);
-        job.setMapOutputValueClass(Text.class);
+        job.setMapOutputValueClass(ProtobufShangHaiWritable.class);
 
         FileInputFormat.setInputPaths(job, args[0]);
         FileOutputFormat.setOutputPath(job, new Path(args[1]));

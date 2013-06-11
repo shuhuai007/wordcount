@@ -12,15 +12,12 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
-import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-import com.allyes.carpenter.tianqi.mapreduce.io.ProtobufTianqiSawLogWritable;
 import com.zhoujie.hive.FactPBHive.ShangHai;
 import com.zhoujie.hive.mapreduce.io.ProtobufShangHaiWritable;
 import com.zhoujie.hive.mapreduce.output.LzoShangHaiProtobufB64LineOutputFormat;
-import com.zhoujie.hive.mapreduce.output.LzoShangHaiProtobufBlockOutputFormat;
 
 public class LzoPBMutiMapTest extends Configured implements Tool {
 
@@ -89,12 +86,8 @@ public class LzoPBMutiMapTest extends Configured implements Tool {
 
         MultipleOutputs.addNamedOutput(job, "beijing", LzoShangHaiProtobufB64LineOutputFormat.class,
                 NullWritable.class, ProtobufShangHaiWritable.class);
-//        MultipleOutputs.addNamedOutput(job, "beijing", LzoShangHaiProtobufBlockOutputFormat.class,
-//                NullWritable.class, ProtobufShangHaiWritable.class);
         MultipleOutputs.addNamedOutput(job, "shanghai", LzoShangHaiProtobufB64LineOutputFormat.class,
                 NullWritable.class, ProtobufShangHaiWritable.class);
-//        MultipleOutputs.addNamedOutput(job, "shanghai", LzoShangHaiProtobufBlockOutputFormat.class,
-//                NullWritable.class, ProtobufShangHaiWritable.class);
 
         return job.waitForCompletion(true) ? 0 : 1;
     }

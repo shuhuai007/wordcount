@@ -7,5 +7,5 @@ shanghai:
 - com.twitter.elephantbird.proto.codegen.ProtobufWritableGenerator
 #- com.twitter.elephantbird.proto.codegen.LzoProtobufB64LinePigLoaderGenerator
 #- com.twitter.elephantbird.proto.codegen.LzoProtobufBlockPigLoaderGenerator
-#- com.twitter.elephantbird.proto.codegen.LzoProtobufHiveSerdeGenerator
+- com.twitter.elephantbird.proto.codegen.LzoProtobufHiveSerdeGenerator
 #- com.twitter.elephantbird.proto.codegen.ProtobufBytesToPigTupleGenerator

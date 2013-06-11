@@ -6,7 +6,7 @@ create table shanghai (region_name STRING, info STRING)
   with serdeproperties (
     "serialization.class"="com.zhoujie.hive.FactPBHive$ShangHai")
   stored as
-    inputformat "com.zhoujie.hive.mapreduce.input.LzoShangHaiProtobufBlockInputFormat"
+    inputformat "com.zhoujie.hive.mapreduce.input.LzoShangHaiProtobufB64LineInputFormat"
     outputformat  "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat";
 
 LOAD DATA INPATH '/user/hadoop/zhoujie/output/multioutput_pb/shanghai/' INTO TABLE shanghai;

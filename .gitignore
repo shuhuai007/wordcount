@@ -1,0 +1,7 @@
+.classpath
+.project
+build
+dist
+src/gen-java
+src/gen-python
+*.pyc

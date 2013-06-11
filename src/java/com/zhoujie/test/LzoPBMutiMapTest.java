@@ -17,7 +17,7 @@ import org.apache.hadoop.util.ToolRunner;
 
 import com.zhoujie.hive.FactPBHive.ShangHai;
 import com.zhoujie.hive.mapreduce.io.ProtobufShangHaiWritable;
-import com.zhoujie.hive.mapreduce.output.LzoShangHaiProtobufB64LineOutputFormat;
+import com.zhoujie.hive.mapreduce.output.LzoShangHaiProtobufBlockOutputFormat;
 
 public class LzoPBMutiMapTest extends Configured implements Tool {
 
@@ -84,9 +84,9 @@ public class LzoPBMutiMapTest extends Configured implements Tool {
         FileInputFormat.setInputPaths(job, args[0]);
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
-        MultipleOutputs.addNamedOutput(job, "beijing", LzoShangHaiProtobufB64LineOutputFormat.class,
+        MultipleOutputs.addNamedOutput(job, "beijing", LzoShangHaiProtobufBlockOutputFormat.class,
                 NullWritable.class, ProtobufShangHaiWritable.class);
-        MultipleOutputs.addNamedOutput(job, "shanghai", LzoShangHaiProtobufB64LineOutputFormat.class,
+        MultipleOutputs.addNamedOutput(job, "shanghai", LzoShangHaiProtobufBlockOutputFormat.class,
                 NullWritable.class, ProtobufShangHaiWritable.class);
 
         return job.waitForCompletion(true) ? 0 : 1;

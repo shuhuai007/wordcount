@@ -20,7 +20,9 @@ cloud_output_basedir = "zhoujie/output"
 ruleClassNameMap = {"ip_cookie_channel" : "com.allyes.frauddetection.SSPIPCookieTimeintervalChannel",
                     "periodicclick" : "com.allyes.frauddetection.SSPPeriodicClick",
                     "wordcount" : "com.zhoujie.test.WordCount",
-                    "multioutput" : "com.zhoujie.test.TextMutiMapTest"}
+                    "multioutput_text" : "com.zhoujie.test.TextMutiMapTest",
+                    "multioutput_pb" : "com.zhoujie.test.LzoPBMutiMapTest"
+                    }
 
 
 
@@ -78,7 +80,9 @@ def main():
     #execute_mr('ssp', 'ip_cookie_channel')
     #execute_mr('ssp', 'periodicclick')
     #execute_regular_job('wordcount')
-    execute_input_output_job('multioutput')
+    #execute_input_output_job('multioutput')
+    execute_input_output_job('multioutput_pb')
+    
 
 if __name__ == '__main__':
     main()

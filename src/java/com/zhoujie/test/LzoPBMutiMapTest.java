@@ -16,10 +16,15 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+import com.allyes.carpenter.tianqi.mapreduce.io.ProtobufTianqiSawLogWritable;
+import com.zhoujie.hive.FactPBHive.ShangHai;
+import com.zhoujie.hive.mapreduce.io.ProtobufShangHaiWritable;
+import com.zhoujie.hive.mapreduce.output.LzoShangHaiProtobufBlockOutputFormat;
+
 public class LzoPBMutiMapTest extends Configured implements Tool {
 
     public static class LzoPBMutiMapMaper extends
-            AbstractMutilOutputMapper<Text, Text> {
+            AbstractMutilOutputMapper<Text, ProtobufShangHaiWritable> {
 
         @Override
         protected String getBaseOutputPath(String dirname) {
@@ -35,11 +40,15 @@ public class LzoPBMutiMapTest extends Configured implements Tool {
                 throws IOException, InterruptedException {
             String line = value.toString();
             String[] lineArr = line.split(",");
+            ShangHai.Builder shanghai = ShangHai.newBuilder();
+            shanghai.setRegionName(lineArr[0]);
+            shanghai.setInfo(lineArr[1]);
+            ProtobufShangHaiWritable newValue = new ProtobufShangHaiWritable(shanghai.build());
             if (lineArr[0].equals("beijing")) {
-                super.mos_.write("beijing", NullWritable.get(), line,
+                super.mos_.write("beijing", NullWritable.get(), newValue,
                         getBaseOutputPath("beijing"));
             } else if (lineArr[0].equals("shanghai")) {
-                super.mos_.write("shanghai", NullWritable.get(), line,
+                super.mos_.write("shanghai", NullWritable.get(), newValue,
                         getBaseOutputPath("shanghai"));
             }
 
@@ -73,10 +82,10 @@ public class LzoPBMutiMapTest extends Configured implements Tool {
         FileInputFormat.setInputPaths(job, args[0]);
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
-        MultipleOutputs.addNamedOutput(job, "beijing", TextOutputFormat.class,
-                NullWritable.class, Text.class);
-        MultipleOutputs.addNamedOutput(job, "shanghai", TextOutputFormat.class,
-                NullWritable.class, Text.class);
+        MultipleOutputs.addNamedOutput(job, "beijing", LzoShangHaiProtobufBlockOutputFormat.class,
+                NullWritable.class, ProtobufShangHaiWritable.class);
+        MultipleOutputs.addNamedOutput(job, "shanghai", LzoShangHaiProtobufBlockOutputFormat.class,
+                NullWritable.class, ProtobufShangHaiWritable.class);
 
         return job.waitForCompletion(true) ? 0 : 1;
     }

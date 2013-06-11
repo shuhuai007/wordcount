@@ -1,5 +1,6 @@
 shanghai:
 - com.twitter.elephantbird.proto.codegen.DeprecatedLzoProtobufBlockInputFormatGenerator
+- com.twitter.elephantbird.proto.codegen.DeprecatedLzoProtobufB64LineInputFormatGenerator
 - com.twitter.elephantbird.proto.codegen.LzoProtobufB64LineInputFormatGenerator
 - com.twitter.elephantbird.proto.codegen.LzoProtobufB64LineOutputFormatGenerator
 - com.twitter.elephantbird.proto.codegen.LzoProtobufBlockInputFormatGenerator
